@@ -290,7 +290,21 @@
   ) default charset=utf8 comment '微信商城-物流信息表';
   desc logistic_info;
   drop table logistic_info;
-
+  
+  
+  # 首页轮播图信息表
+  create table `slide_show` (
+    `slide_id` int(4) comment '轮播id',
+    `fk_img_id` bigint(20) not null comment '外键，图片id',
+    `slide_url` varchar(200) not null comment '详情链接',
+    `slide_desc` varchar(300) comment '详情描述',
+    `spare1` varchar(10) comment '备用字段',
+    `spare2` varchar(50) comment '备用字段',
+    `spare3` varchar(100) comment '备用字段',
+    primary  key (`slide_id`),
+    constraint `fk_slide_img` foreign key (`fk_img_id`) references shop.img_info(`img_id`) on update cascade on delete cascade
+  ) default charset=utf8 comment '微信商城系统-首页轮播图信息表';
+  
 
   #测试
   CREATE TABLE `new_mobile` (

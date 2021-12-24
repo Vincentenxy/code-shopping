@@ -4,50 +4,38 @@ import com.alibaba.fastjson.JSONObject;
 import com.wx.shop.common.Constant;
 import com.wx.shop.common.utils.CheckUtils;
 import com.wx.shop.controller.controlinter.ControllerInter;
-import com.wx.shop.service.comm.Serv03002001;
+import com.wx.shop.service.comm.Serv03002002;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * ProjectName: shopping
- * CreateTime: 2021/12/20 23:04
+ * CreateTime: 2021/12/25 0:02
  * Author: vincentEnxy
  * Version: 1.0
- * Description: 图片上传接口
+ * Description: 删除文件接口
  */
 @Slf4j
-@ResponseBody
 @Controller
+@ResponseBody
 @RequestMapping("/api/pub/v1/comm")
-public class Cont03002001 implements ControllerInter<MultipartFile[]>{
+public class Cont03002002 implements ControllerInter<JSONObject> {
 
     @Autowired
-    private Serv03002001 serv03002001;
+    private Serv03002002 serv03002002;
 
-    /**
-     * 图片上传接口
-     * @param files
-     * @return
-     */
-    @RequestMapping(value = "/03002001")
-    public JSONObject excute(@RequestParam("files")MultipartFile[] files) {
+    @Override
+    public JSONObject excute(JSONObject reqJson) {
         JSONObject resp = new JSONObject();
 
-        /* 处理业务逻辑 */
-        JSONObject uploadResult = serv03002001.uploadFiles(files);
+        /* 数据非空校验 */
+        CheckUtils.checkParamValid(reqJson, "fileIndexList");
+
+        /* 业务逻辑 */
+        JSONObject uploadResult = serv03002002.deleteFile(reqJson);
 
         /* 放入通用返回体 */
         resp.put(Constant.RET_CODE, Constant.RET_MSG_SUCC);
@@ -56,4 +44,6 @@ public class Cont03002001 implements ControllerInter<MultipartFile[]>{
         resp.put(Constant.RET_BODY, uploadResult);
         return resp;
     }
+
+
 }

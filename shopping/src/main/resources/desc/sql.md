@@ -4,8 +4,6 @@
 
 - sqls
   ```sql
-  # show databases;
-
 
   use shop;
 
@@ -28,21 +26,21 @@
   desc company_info;
   drop table company_info;
 
-  # 图片信息表
-  create table `img_info` (
-      `img_id` bigint(20) auto_increment comment '图片主键id',
-      `img_num` varchar(20) not null comment '图片编号',
-      `img_url` varchar(256) not null comment '图片url',
-      `img_seq` tinyint(4) default 0 not null comment '图片顺序号',
-      `is_main` tinyint(4) default 1 not null comment '是否主图片，0-否，1-是',
-      `create_time` datetime default now() not null comment '图片创建时间',
+  # 文件信息表
+  create table `file_info` (
+      `file_id` char(45) not null comment '文件id',
+      `file_url` varchar(256) not null comment '文件url',
+      `file_seq` tinyint(4) default 0 comment '文件顺序号',
+      `file_type` tinyint(4) not null comment '文件类型，0-图片，1-视频',
+      `is_main` tinyint(4) default 0 comment '是否主要文件，0-否，1-是',
+      `create_time` datetime default now() not null comment '文件创建时间',
       `spare1` varchar(10) comment '备用字段',
       `spare2` varchar(50) comment '备用字段',
       `spare3` varchar(100) comment '备用字段',
-      primary key (`img_id`)
-  ) default charset=utf8 comment '微信商城系统-图片信息表';
-  desc img_info;
-  drop table img_info;
+      primary key (`file_id`)
+  ) default charset=utf8 comment '微信商城系统-文件信息表';
+  desc file_info;
+
 
   # 用户角色表
   create table role_style (
@@ -206,18 +204,18 @@
   drop table goods_format;
 
   # 图片对应关系表
-  create table `relation_obj_img` (
-      `relation_id` bigint(20) auto_increment comment '商品与图片关系映射表',
+  create table `relation_obj_file` (
+      `relation_id` bigint(20) auto_increment comment '商品与图片关系映射关系id',
       `obj_id` int(10) not null comment '实体信息id',
-      `fk_img_id` bigint(20) not null comment '图片id,',
+      `fk_file_id` varchar(45) not null comment '文件id,',
       `spare1` varchar(10) comment '备用字段',
       `spare2` varchar(50) comment '备用字段',
       `spare3` varchar(100) comment '备用字段',
       primary key (`relation_id`),
-      constraint `fk_relation_img` foreign key (fk_img_id) references shop.img_info(img_id) on update cascade on delete cascade
-  ) default charset=utf8 comment '微信商城系统-实体与商品图片对应表';
-  desc relation_obj_img;
-  drop table relation_obj_img;
+      constraint `fk_relation_file_info` foreign key (fk_file_id) references shop.file_info(file_id) on update cascade on delete cascade
+  ) default charset=utf8 comment '微信商城系统-实体与商品图片视频对应表';
+  desc relation_obj_file;
+  drop table relation_obj_file;
 
   # 购物车表
   create table `goods_shopcar` (
@@ -275,7 +273,7 @@
   desc collect_goods;
   drop table collect_goods;
 
-  # 物流信息包
+  # 物流信息表
   create table `logistic_info` (
       `id` int(10) auto_increment comment 'id,自增主键',
       `fk_order_id` int(10) not null comment '订单id,外键',
@@ -290,21 +288,23 @@
   ) default charset=utf8 comment '微信商城-物流信息表';
   desc logistic_info;
   drop table logistic_info;
-  
-  
-  # 首页轮播图信息表
+
+  # 首页轮播图信息
+  use shop;
   create table `slide_show` (
-    `slide_id` int(4) comment '轮播id',
-    `fk_img_id` bigint(20) not null comment '外键，图片id',
-    `slide_url` varchar(200) not null comment '详情链接',
-    `slide_desc` varchar(300) comment '详情描述',
-    `spare1` varchar(10) comment '备用字段',
-    `spare2` varchar(50) comment '备用字段',
-    `spare3` varchar(100) comment '备用字段',
-    primary  key (`slide_id`),
-    constraint `fk_slide_img` foreign key (`fk_img_id`) references shop.img_info(`img_id`) on update cascade on delete cascade
+      `slide_id` int(4) comment '轮播id',
+      `fk_file_id` varchar(45) not null comment '外键，图片id',
+      `slide_url` varchar(200) not null comment '详情链接',
+      `slide_desc` varchar(300) comment '详情描述',
+      `spare1` varchar(10) comment '备用字段',
+      `spare2` varchar(50) comment '备用字段',
+      `spare3` varchar(100) comment '备用字段',
+      primary  key (`slide_id`),
+      constraint `fk_slide_file` foreign key (`fk_file_id`) references shop.file_info(`file_id`) on update cascade on delete cascade
   ) default charset=utf8 comment '微信商城系统-首页轮播图信息表';
-  
+  desc slide_show;
+  drop table shop.slide_show;
+  truncate table  shop.slide_show;
 
   #测试
   CREATE TABLE `new_mobile` (
@@ -323,4 +323,32 @@
   # 格式化时间
   select date_format(now(), '%Y%m%d%H%m%s');
 
+
+  # 创建用户wxshop/123456 指定shop库
+  show databases;
+  use mysql;
+  show tables;
+  desc user;
+
+  # 创建wxshop/123456
+  create user 'wxshop'@'%' identified by '1233456';
+
+  # 修改用户密码 5.7版本以后版本，没有password字段
+  alter user 'wxshop'@'%' identified by '123456';  # 方法1
+  update user set authentication_string=password('123456') where user = 'wxshop'; # 方法2
+  flush privileges ;
+
+  # 设置外键检查
+  set foreign_key_checks  = 0;
+
+
+
+  # 指定数据库
+  grant all on shop.* to 'wxshop'@'%';
+
+  # 查询数据
+  select Host, User from user;
+
+
+  
   ```

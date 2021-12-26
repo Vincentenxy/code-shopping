@@ -24,7 +24,8 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   # type-aliases-package: com.wx.shop.model.entity # 所有entity别名所在包
   type-aliases-package: com.wx.shop.entities.pojo # 所有entity别名所在包
-
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
   config: classpath:log4j2-spring.xml
@@ -35,3 +36,4 @@ savefile:
   file:
     root:
       path: "C:\\Users\\vincentEnxy\\Desktop\\Temp\\imgs\\" # 存储路径
+

@@ -1,4 +1,4 @@
-package com.wx.shop.controller.controlinter;
+package com.wx.shop.controller;
 
 import com.alibaba.fastjson.JSONObject;
 

@@ -4,17 +4,18 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * ProjectName: shopping
- * CreateTime: 2021/12/25 0:04
+ * CreateTime: 2021/12/25 20:53
  * Author: vincentEnxy
  * Version: 1.0
- * Description: 删除文件接口
+ * Description:
  */
-public interface Serv03002002 {
+public interface Serv03002003 {
+
 
     /**
-     * 插入文件信息
+     * 文件删除接口
      * @param reqJson
      * @return
      */
-    public JSONObject insertFileInfo(JSONObject reqJson);
+    public JSONObject deleteFile(JSONObject reqJson);
 }

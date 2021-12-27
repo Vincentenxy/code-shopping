@@ -15,22 +15,31 @@ import org.springframework.stereotype.Component;
  * CreateTime: 2021/12/18
  * Author: vincentEnxy
  * Version: 1.0
- * Description: 切面
+ * Description: controller 数据校验切面
  */
 @Slf4j
 @Component
 @Aspect
-public class CommonAspect {
+public class ContCheckAspect {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private final String POINT_CUT_LOG = "execution( public * com.wx.shop.controller.*.*.*(..))";
+    private final String POINT_CUT_LOG = "execution( public * com.wx.shop.controller.*.*.*(..)) && !execution( public * com.wx.shop.controller.noaop.*.*(..))";
+
+
+    /* stirng */
+    private final String POIINT_CUT_TRAND_DATA = "execution( public * com.wx.shop.controller.*.*.*(String))";
+
 
     // 定义切面，记录日志
     @Pointcut(POINT_CUT_LOG)
-    public void pointCut(){}
+    public void pointCutLog(){}
 
-    @Around(value = "pointCut()")
+    /* String转json拦截器 */
+    @Pointcut(POIINT_CUT_TRAND_DATA)
+    public void poiintCutStr(){}
+
+    @Around(value = "pointCutLog()")
     public Object aroundLog (ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         String className = proceedingJoinPoint.getClass().toString();

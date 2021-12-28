@@ -1,0 +1,108 @@
+.selection{
+  /*border-bottom:2px solid #ddd;*/
+}
+
+.header{
+  border-left-width: 2px;   /*宽度2px*/
+  border-left-style: solid; /*实线*/
+  border-left-color: limegreen; /*绿色*/
+  display:flex;                   /*flex布局*/
+  justify-content: space-between; /*对齐方式*/
+  align-items: center;   /*文字居中*/
+  font-size: 13px;
+  height: 60rpx;
+  padding-left:10rpx;
+  padding-right: 10rpx;
+  margin-top:10rpx;
+  margin-bottom: 10rpx;
+}
+
+.slide-image{
+  width:100%;    /*图片撑满view*/
+  height:100%
+}
+
+.text-all{
+  color: green;
+  font-size:10px;
+}
+
+.content{
+  display: flex;    /*布局方式*/
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;  
+}
+
+.content-item{
+  height: 250rpx;
+  width: 45%;
+  background-color: greenyellow;
+  margin: 2px;      /*各个view之间间隔2px*/
+  position: relative;   /*定位*/
+}
+
+.content-item image{
+  width:100%;    /*图片撑满view*/
+  height:100%
+}
+
+.content-item-text{
+  position: absolute;
+  bottom:0px;
+  font-size: 10px;
+  /*background: -webkit-linear-gradient(bottom,rgba(0,0,0,0.5),rgba(0,0,0,0))*/
+  height:125rpx;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-end;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+}
+
+.item-list{
+  height:500rpx;
+  width:100%;
+}
+
+.list-item-images{
+  height:300rpx;
+  width:100%;
+  position: relative;
+}
+
+.list-item-images-img{
+  height:100%;
+  width:100%;
+}
+
+.avatar{
+  height: 100rpx;
+  width:100rpx;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -50rpx;
+  right:50rpx;
+}
+
+.list-item-text{
+  height:200rpx;
+  width:96%;
+  background-color: white;
+  margin-top: 20rpx;
+  padding-left:10rpx;
+  padding-right: 10rpx; 
+}
+
+.list-item-text-title{
+  
+}
+
+.list-item-text-content{
+  font-size: 10px;
+  color: #999;
+  margin-top: 20rpx;
+}
+

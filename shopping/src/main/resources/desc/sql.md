@@ -13,6 +13,21 @@
 
   desc user_address;
 
+  # 管理端菜单表
+  create table `menu_info` (
+    `menu_id` tinyint(4) comment '菜单id',
+    `menu_name` varchar(60) not null comment '菜单名称',
+    `menu_parent` tinyint(4) comment '父菜单id',
+    `router` varchar(200) comment '菜单对应的路由',
+    `spare1` varchar(10) comment '备用字段',
+    `spare2` varchar(50) comment '备用字段',
+    `spare3` varchar(100) comment '备用字段',
+    primary  key (`menu_id`)
+  ) default charset=utf8 comment '微信商城系统-管理端左侧菜单栏表';
+  desc menu_info;
+  drop table menu_info;
+
+  
   # 公司信息表
   create table `company_info` (
       `company_id` int(10) auto_increment comment '公司id，主键',

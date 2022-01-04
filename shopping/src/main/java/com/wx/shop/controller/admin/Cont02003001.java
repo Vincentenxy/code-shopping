@@ -24,7 +24,7 @@ import java.sql.PreparedStatement;
 @Slf4j
 @Controller
 @ResponseBody
-@RequestMapping("/api/pub/v1")
+@RequestMapping("/api/pub/v1/adm")
 public class Cont02003001 implements ControllerInter<String> {
 
     @Autowired
@@ -33,6 +33,8 @@ public class Cont02003001 implements ControllerInter<String> {
     @Override
     @RequestMapping("/02003001")
     public JSONObject excute(@RequestBody String reqStr) {
+
+        log.info("====reqStr="+ reqStr);
 
         /* 业务逻辑处理前公共数据处理 */
         JSONObject reqJson = befExec(reqStr);
@@ -47,8 +49,7 @@ public class Cont02003001 implements ControllerInter<String> {
     @Override
     public JSONObject befExec(String s) {
         JSONObject reqJson = (JSONObject) JSONObject.parse(s);
-        log.info("======>", reqJson);
-
+        log.info("======>{}", s);
         JSONObject reqBody = reqJson.getJSONObject("reqBody");
         log.info("02003001 接收业务数据:", reqBody);
         return reqBody;

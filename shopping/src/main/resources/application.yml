@@ -26,6 +26,7 @@ mybatis:
   type-aliases-package: com.wx.shop.entities.pojo # 所有entity别名所在包
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 
 logging:
   config: classpath:log4j2-spring.xml

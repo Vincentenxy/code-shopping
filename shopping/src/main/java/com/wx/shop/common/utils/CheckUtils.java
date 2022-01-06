@@ -16,16 +16,18 @@ public class CheckUtils {
 
 
     /**
-     * 校验reqJson 中params 是否为空
-     * @param reqJson 入参json
+     * 校验checkJson 中params 是否为空
+     * @param checkJson 入参json
      * @param params 校验字段
      * @return
      *      "": 校验通过
      *      param: 参数param非空
      */
-    public static String checkParamValid(JSONObject reqJson, String... params){
+    public static String checkParamValid(JSONObject checkJson, String... params){
         for(String param : params){
-            if("".equals(reqJson.getString(param))) return param.toUpperCase(Locale.ROOT);
+            System.out.println(param);
+            if(checkJson.getString(param) == null || "".equals(checkJson.getString(param)))
+                return param.toUpperCase(Locale.ROOT);
         }
         return "";
     }

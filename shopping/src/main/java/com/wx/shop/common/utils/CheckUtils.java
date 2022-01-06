@@ -1,6 +1,8 @@
 package com.wx.shop.common.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wx.shop.exception.entity.BusinessException;
+import com.wx.shop.exception.entity.ExecConstant;
 
 import java.util.Locale;
 
@@ -25,12 +27,26 @@ public class CheckUtils {
      */
     public static String checkParamValid(JSONObject checkJson, String... params){
         for(String param : params){
-            System.out.println(param);
             if(checkJson.getString(param) == null || "".equals(checkJson.getString(param)))
                 return param.toUpperCase(Locale.ROOT);
         }
         return "";
     }
 
+    /**
+     * 抛出异常的非空校验方法
+     * 不能校验非String类型字段
+     * @param checkJson 入参json
+     * @param params 校验字段
+     * @return
+     * @throws BusinessException
+     */
+    public static boolean checkParamValidException(JSONObject checkJson, String... params) throws BusinessException{
+        for(String param: params){
+            if(checkJson.getString(param) == null || "".equals(checkJson.getString(param)))
+                throw new BusinessException(ExecConstant.ERR_CODE_1001, param.toUpperCase(Locale.ROOT)+"_IS_INVALID");
+        }
+        return true;
+    }
 
 }

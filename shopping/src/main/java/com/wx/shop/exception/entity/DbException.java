@@ -1,4 +1,4 @@
-package com.wx.shop.entities.exceptions;
+package com.wx.shop.exception.entity;
 
 /**
  * ProjectName: shopping

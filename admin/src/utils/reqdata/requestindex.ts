@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-01-01 19:52:56
- * @LastEditTime: 2022-01-02 09:34:15
+ * @LastEditTime: 2022-01-08 15:58:11
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \test-vue\src\utils\reqdata\index.ts
@@ -13,8 +13,8 @@ import http from "./reqeusttool"
  * 请求常量
  */
 enum ReqConstans {
-  BASE_URL_PRI = "/api/pri/v1/",
-  BASE_URL_LOGIN = "/api/pub/v1/"
+  BASE_URL_PRI = "/api/pri/v1/adm/",
+  BASE_URL_LOGIN = "/api/pub/v1/comm/"
 }
 
 export const GetRequest = (reqUrl: string) => {
@@ -37,7 +37,8 @@ export const PostRequest = (reqCode: string, reqData: any, ...reqParams: string[
   let reqStr: any = {
     "reqCode": reqCode,
     "reqMsg": reqParams[1],
-    "reqData": reqData
+    "reqComm": {},
+    "reqBody": reqData
   }
 
   return http.request({

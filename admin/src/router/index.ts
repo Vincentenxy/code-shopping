@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-01-02 10:50:22
- * @LastEditTime: 2022-01-02 18:21:15
+ * @LastEditTime: 2022-01-10 00:20:08
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \test-vue\src\router\index.ts
@@ -39,37 +39,32 @@ const routes: Array<any> = [
     component: Layout,
     children: [
       {
-        path: "goods-list",
-        name: "GoodsList",
-        component: () => import("../views/Goodslist.vue")
+        path: "InputGoods",
+        name: "商品录入",
+        component: () => import("../views/goods/InputGoods.vue")
       },
       {
-        path: "goods-info",
-        name: "商品详情",
-        component: () => import("../views/Goodsinfo.vue")
+        path: "ModifyGoodsInfo",
+        name: "修改商品信息",
+        component: () => import("../views/goods/ModifyGoodsInfo.vue")
       }
     ]
   },
   {
-    path: "/user",
-    name: "用户管理",
+    path: "/orders",
+    name: "订单管理",
     component: Layout,
     children: [
       {
-        path: "user-list",
-        name: "Userlist",
-        component: () => import("../views/Userlist.vue")
-      },
-      {
-        path: "user-setting",
-        name: "Usersetting",
-        component: () => import("../views/Usersetting.vue")
+        path: "ViewOrderInfo",
+        name: "订单信息查询",
+        component: () => import("../views/orders/ViewORderInfo.vue")
       }
     ]
   },
   {
     path: "/:pathMatch(.*)*",
-    name: "NotFound",
+    name: "通用错误提示页面!",
     component: () => import("../views/Notfound.vue")
   }
 ];

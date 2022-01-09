@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
- * @Date: 2022-01-02 11:44:00
- * @LastEditTime: 2022-01-02 11:58:42
+ * @Date: 2022-01-09 23:42:10
+ * @LastEditTime: 2022-01-10 00:19:41
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \test-vue\src\views\Usersetting.vue
+ * @FilePath: \admin\src\views\goods\ModeGoodsInfo.vue
 -->
 <template>
   <div>
-    Usersetting Page
+    ModifyGoodsInfo Page
   </div>
 </template>
 

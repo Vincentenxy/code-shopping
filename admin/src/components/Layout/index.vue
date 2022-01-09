@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-01-02 10:59:49
- * @LastEditTime: 2022-01-03 00:36:56
+ * @LastEditTime: 2022-01-10 00:33:24
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \test-vue\src\Layout\index.vue
@@ -15,45 +15,39 @@
       </div>
     </el-header>
     <el-container>
-      <el-aside width="200px">
-         <el-menu
-        active-text-color="#ffd04b"
-        background-color="#545c64"
-        class="el-menu-vertical-demo"
-        default-active="2"
-        text-color="#fff"
-      >
-      <!-- 一级菜单 -->
-        <el-sub-menu index="1">
+    
+      <el-aside :width="isCollapse ? '60px': '200px'">
+        <div class="toggle-button" @click="openCollapse">|||</div>
+        <el-menu
+          active-text-color="#ffd04b"
+          background-color="#545c64"
+          class="el-menu-vertical-demo"
+          default-active="2"
+          text-color="#fff"
+          router
+          :collapse="isCollapse"
+          :collapse-transition="false"
+        >
+
+        <el-sub-menu v-for="item in menus" 
+          :index="item.menuId" 
+          :key="item.menuId" 
+        >
           <template #title>
-            <el-icon><location /></el-icon>
-            <span>商品管理</span>
+            <span>{{item.menuName}}</span>
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">添加商品</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
+          <el-menu-item
+            v-for="itemc in item.childMenus"
+            :index="itemc.router"
+            :key="itemc.menuId"
+          >
+            <template #title>
+              <span>{{itemc.menuName}}</span>
+              <!-- <router-link to="/Goodsinfo">Goodsinfo</router-link> -->
+            </template>
+          </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
-          <span>用户管理</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon><document /></el-icon>
-          <span>菜单3</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon><setting /></el-icon>
-          <span>菜单4</span>
-        </el-menu-item>
-      </el-menu>
+        </el-menu>
       </el-aside>
       <el-main>
         <router-view></router-view>
@@ -63,8 +57,57 @@
 </template>
 
 <script lang="ts" setup>
+  import {ref, onBeforeMount, onMounted, reactive } from "@vue/runtime-core";
+  import { GetRequest, PostRequest } from "../../utils/reqdata/requestindex"
+  import Goodsinfo from "../../views/Goodsinfo.vue"
+ 
+  // 菜单栏接口
+  interface iNavMenu {
+    menuId: string, 
+    menuName: string,
+    menuIcon: string,
+    childMenus?: Array<iNavMenu>
+  }
 
-let imgurl = "C:\\Users\\vincentEnxy\\Desktop\\Temp\\imgs\\20220102\\20220102_4f024f67-5cf9-41aa-a8b5-d93512b782aa.jpg";
+  let imgurl: string = "C:\\Users\\vincentEnxy\\Desktop\\Temp\\imgs\\20220102\\20220102_4f024f67-5cf9-41aa-a8b5-d93512b782aa.jpg";
+
+  // 左侧菜单栏信息 
+  let menus = ref<iNavMenu[]>([]); 
+  let mainRouter = ref<string>(''); // 动态路由
+  
+  // 菜单展开折叠控制变量
+  let isCollapse = ref<boolean>(true); 
+  
+  /**
+   * 获取管理端相关信息 
+   */
+  function queryAdminInfo(){
+    let reqData = {
+      "userId": "123123"
+    };
+    PostRequest("02003001", reqData).then( res=> {
+      console.log("menuInfo=" + JSON.stringify(res.respBody))
+      menus.value = res.respBody.menuInfo;
+   }); 
+  }
+
+  /**
+   * 修改菜单展开关闭属性
+   */
+  function openCollapse(){
+    isCollapse.value = !isCollapse.value; 
+  }
+
+
+  onBeforeMount(()=>{
+    /* 页面初始化数据获取 */ 
+    queryAdminInfo();   // 获取首页相关信息
+    console.log("0---->", menus)
+  }); 
+
+  onMounted(()=>{
+    console.log("1---->", menus)
+  }); 
 
 </script>
 
@@ -88,5 +131,14 @@ let imgurl = "C:\\Users\\vincentEnxy\\Desktop\\Temp\\imgs\\20220102\\20220102_4f
   height: 60px;
   width: 60px;
   margin-right: 10px;
+}
+.toggle-button{
+  background-color: #4a5064; 
+  font-size: 10px;
+  line-height: 24px;
+  color:#fff;
+  text-align: center;
+  letter-spacing: 0.2em;
+  cursor: pointer;
 }
 </style>

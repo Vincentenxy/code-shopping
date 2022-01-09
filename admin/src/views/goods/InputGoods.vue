@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
- * @Date: 2022-01-02 11:43:46
- * @LastEditTime: 2022-01-02 11:58:18
- * @LastEditors: Please set LastEditors
+ * @Date: 2022-01-09 23:41:51
+ * @LastEditTime: 2022-01-09 23:51:34
+ * @LastEditors: your name
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \test-vue\src\views\Userlist.vue
+ * @FilePath: \admin\src\views\goods\InputGoods.vue
 -->
 <template>
   <div>
-    Userlist Page
+    InputGoods Page
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-01-02 10:59:49
- * @LastEditTime: 2022-01-10 00:33:24
+ * @LastEditTime: 2022-01-10 22:33:53
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \test-vue\src\Layout\index.vue
@@ -11,7 +11,7 @@
     <el-header style="text-align: left; font-size: 12px">
       <div class="header-div">
         <img src ="../../assets/logo.png" alt="logo" />
-        <span>微信商城管理端</span>
+        <span><router-link to="/">微信商城管理端</router-link></span>
       </div>
     </el-header>
     <el-container>
@@ -141,4 +141,9 @@
   letter-spacing: 0.2em;
   cursor: pointer;
 }
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 </style>

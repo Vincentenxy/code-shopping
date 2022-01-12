@@ -1,12 +1,4 @@
-<!--
- * @Author
-  components: { Userlist },: your name
- * @Date: 2022-01-02 11:07:14
- * @LastEditTime: 2022-01-11 00:00:12
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \test-vue\src\views\Login.vue
--->
+
 <template>
   Login Page
   <div class="login_box">
@@ -23,7 +15,7 @@
         <el-input type="password" v-model="ruleForm.passwd" prefix-icon="lock"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+        <el-button type="primary" @click="submitForm()">登录</el-button>
         <el-button type="info" @click="resetLoginForm ">重置</el-button>
       </el-form-item>
     </el-form>
@@ -36,6 +28,7 @@ import { reactive, ref } from "@vue/reactivity";
 import { PostRequest } from "./../utils/reqdata/requestindex";
 import { ElForm } from "element-plus";
 import Userlist from "./Userlist.vue";
+import md5 from "js-md5"
 
 const ruleForm = reactive({
   name: '',
@@ -76,20 +69,24 @@ const loginRules = reactive({
 const loginFormRef = ref(); 
 
 /* 提交form表单 */
-function submitForm(loginFormRef: any){
-  console.log("=======》用户点击登录")
+function submitForm(){
+  console.log("===>用户点击登录"); 
   const login = () =>{
-    loginFormRef.value.validdate((valid: boolean)=>{
+    console.log("00000>>>>")
+    loginFormRef.value.validate((valid: boolean)=>{
       if(!valid) return;
       const params = {
-        userName: ruleForm.name,
-        password: ruleForm.passwd
+        username: ruleForm.name,
+        password: md5(ruleForm.passwd)
       };
+      console.log("--------->"+JSON.stringify(params))
       PostRequest('03001001', params, 'pub').then((resp)=>{
         console.log("========>" + JSON.stringify(resp));
       }); 
     });
   }
+
+  login(); 
 }
 
 /* 重置form表单 */

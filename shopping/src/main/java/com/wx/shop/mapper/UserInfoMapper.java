@@ -1,6 +1,7 @@
 package com.wx.shop.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wx.shop.entities.pojo.UserInfoModel;
 import com.wx.shop.sys.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,4 +21,12 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
      * @return
      */
     public String queryUserPassword(String username);
+
+    /**
+     * 插入用户信息
+     * @return
+     */
+    public int insertUserInfo(UserInfoModel userInfoModel);
+
+
 }

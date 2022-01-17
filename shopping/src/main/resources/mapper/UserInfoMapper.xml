@@ -7,4 +7,10 @@
         select user_passwd from user_info where user_name = #{username};
     </select>
 
+    <insert id="insertUserInfo" parameterType="com.wx.shop.entities.pojo.UserInfoModel">
+        insert into user_info values (#{userId}, #{userName}, #{userPasswd}, #{userPhone}, now(), #{imgId}, #{fkRoleId}, #{spare1}, #{spare2}, #{spare3})
+    </insert>
+
+
+
 </mapper>

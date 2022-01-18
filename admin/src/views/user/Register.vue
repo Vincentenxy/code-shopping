@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-01-13 00:21:56
- * @LastEditTime: 2022-01-17 23:38:03
+ * @LastEditTime: 2022-01-18 23:04:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \admin\src\views\user\Register.vue
@@ -25,7 +25,7 @@
     <el-form-item label="手机号" prop="phone">
       <el-input v-model="registForm.phone" class="sty_input"></el-input>
     </el-form-item>
-    <el-form-item label="角色" prop="phone">
+    <el-form-item label="角色" prop="roleId">
     <el-select v-model="registForm.roleId" class="sty_input" placeholder="普通用户">
         <el-option label="店主" value="011"></el-option>
         <el-option label="管理员" value="012"></el-option>
@@ -33,7 +33,16 @@
       </el-select>
     </el-form-item>
   </el-form>
+  <el-row :gutter="20">
+    <el-col :span="7"></el-col>
+    <el-col :span="6">
       <el-button type="primary" @click="registUser()" style="margin-bottom: 20px;">注册</el-button>
+    </el-col>
+    <el-col :span="6">
+      <span><router-link to="/login">去登录</router-link></span>
+    </el-col>
+</el-row>
+
   </div>
 
 </template>
@@ -94,6 +103,13 @@
         pattern:/^(13[0-9]|14[579]|15(0-3,6-9)|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
         message: "请输入正确的手机号码"
       }
+    ],
+    roleId: [
+      {
+        required: true,
+        message: '请选择角色',
+        trigger: 'blur',
+      },
     ]
   }); 
 
@@ -145,5 +161,10 @@
 }
 .sty_input{
   width: 220px;
+}
+
+a {
+  /* text-decoration: none; */
+  color: rgb(52, 140, 241);
 }
 </style>

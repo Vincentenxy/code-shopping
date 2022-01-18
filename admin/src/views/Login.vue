@@ -1,26 +1,26 @@
-
 <template>
-  Login Page
   <div class="login_box">
+    <div class="header-div">
+      <img src ="../assets/logo.png" alt="logo" />
+    </div>
     <el-form
       ref="loginFormRef"
       class="login_form"
       :model="ruleForm"
       :rules="loginRules"
     >
-      <el-form-item lable="用户名" prop="name">
-        <el-input v-model="ruleForm.name" prefix-icon="user"></el-input>
+      <el-form-item lable="用户名" prop="name" >
+        <el-input v-model="ruleForm.name" prefix-icon="user" style="width: 300px;"></el-input>
       </el-form-item>
       <el-form-item lable="密码" prop="passwd">
-        <el-input type="password" v-model="ruleForm.passwd" prefix-icon="lock"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm()">登录</el-button>
-        <el-button type="info" @click="resetLoginForm ">重置</el-button>
+        <el-input type="password" v-model="ruleForm.passwd" prefix-icon="lock" style="width: 300px;"></el-input>
       </el-form-item>
     </el-form>
+    <el-button type="primary" @click="submitForm()">登录</el-button>
+    <el-button type="info" @click="resetLoginForm">重置</el-button>
+    <br/><br/>
+    <span>没有账号？现在 <router-link to="/regist">注册</router-link></span>
   </div>
-
 </template>
 
 <script lang="ts" setup>
@@ -70,9 +70,7 @@ const loginFormRef = ref();
 
 /* 提交form表单 */
 function submitForm(){
-  console.log("===>用户点击登录"); 
   const login = () =>{
-    console.log("00000>>>>")
     loginFormRef.value.validate((valid: boolean)=>{
       if(!valid) return;
       const params = {
@@ -100,14 +98,29 @@ function resetLoginForm(){
 <style scoped>
 .login_form {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 25%;
   box-sizing: border-box;
 }
 .login_box {
-  width: 450px;
+  width: 400px;
   height: 300px;
   background-color: #fff;
   border-radius: 3px;
   margin: auto;
+  border: solid 1px black;
+  border-radius: 10px;
+  text-align: center;
+}
+
+a {
+  /* text-decoration: none; */
+  color: rgb(52, 140, 241);
+}
+
+.header-div img {
+  vertical-align: middle;
+  height: 60px;
+  width: 60px;
+  margin: 5px auto ;
 }
 </style>

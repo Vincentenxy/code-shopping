@@ -26,8 +26,9 @@
 <script lang="ts" setup>
 import { reactive, ref } from "@vue/reactivity";
 import { PostRequest } from "./../utils/reqdata/requestindex";
-import { ElForm } from "element-plus";
+import { ElForm,ElMessage } from "element-plus";
 import Userlist from "./Userlist.vue";
+  import Router from "../router/index"
 import md5 from "js-md5"
 
 const ruleForm = reactive({
@@ -68,6 +69,8 @@ const loginRules = reactive({
 // 
 const loginFormRef = ref(); 
 
+
+
 /* 提交form表单 */
 function submitForm(){
   const login = () =>{
@@ -77,9 +80,14 @@ function submitForm(){
         username: ruleForm.name,
         password: md5(ruleForm.passwd)
       };
-      console.log("--------->"+JSON.stringify(params))
       PostRequest('03001001', params, 'pub').then((resp)=>{
-        console.log("========>" + JSON.stringify(resp));
+        console.log("===用户登录了=====>" + JSON.stringify(resp));
+        let respBody = resp.respBody; 
+        if("1" === respBody.verifyResult){ // 登录成功
+          Router.push("/main");
+        }else {
+          ElMessage.error(respBody.verifyMsg)
+        }
       }); 
     });
   }

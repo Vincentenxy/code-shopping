@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-01-13 00:21:56
- * @LastEditTime: 2022-01-18 23:04:42
+ * @LastEditTime: 2022-01-19 00:15:34
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \admin\src\views\user\Register.vue
@@ -50,6 +50,7 @@
   import { reactive, ref } from "@vue/reactivity";
   import { PostRequest } from "../../utils/reqdata/requestindex";
   import { ElForm } from "element-plus";
+  import Router from "../../router/index"
   import md5 from "js-md5"
   
   const formRules = reactive({
@@ -138,7 +139,6 @@
       console.log("注册请求发送数据", )
       PostRequest('03001002', params, 'pub').then(res=>{
         console.log("用户注册返回数据==>" + JSON.stringify(res)); 
-        
       }); 
     });
 

@@ -7,7 +7,7 @@
         select file_url from file_info
     </select>
 
-    <insert id="insertFileInfo" parameterType="com.wx.shop.entities.pojo.FileInfoModel" >
+    <insert id="insertFileInfo" parameterType="com.wx.shop.entities.pojo.FileInfo" >
         insert into
             file_info
         values

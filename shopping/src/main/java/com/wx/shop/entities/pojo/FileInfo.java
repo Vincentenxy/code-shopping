@@ -1,5 +1,9 @@
 package com.wx.shop.entities.pojo;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +13,9 @@ import java.io.Serializable;
  * Version: 1.0
  * Description: 保存的文件
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class FileInfo implements Serializable {
 
     private static final long serialVersionUID = 7312117949855179477L;

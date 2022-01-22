@@ -3,7 +3,7 @@
 <mapper namespace="com.wx.shop.mapper.AdminMapper">
 
     <!-- 查询管理端左侧菜单相关信息 -->
-    <select id="queryMenuInfo" resultType="com.wx.shop.entities.pojo.MenuInfoModel">
+    <select id="queryMenuInfo" resultType="com.wx.shop.entities.pojo.MenuInfo">
         select * from menu_info
     </select>
 </mapper>

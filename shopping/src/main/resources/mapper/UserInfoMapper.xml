@@ -10,12 +10,12 @@
     </select>
 
     <!--  插入用户  -->
-    <insert id="insertUserInfo" parameterType="com.wx.shop.entities.pojo.UserInfoModel">
+    <insert id="insertUserInfo" parameterType="com.wx.shop.entities.pojo.UserInfo">
         insert into user_info values (#{userId}, #{userName}, #{userPasswd}, #{userPhone}, now(), #{imgId}, #{fkRoleId}, #{spare1}, #{spare2}, #{spare3})
     </insert>
 
     <!--  通过用户名查询用户信息  -->
-    <select id="queryByUserName" parameterType="java.lang.String" resultType="com.wx.shop.entities.pojo.UserInfoModel">
+    <select id="queryByUserName" parameterType="java.lang.String" resultType="com.wx.shop.entities.pojo.UserInfo">
         select * from user_info where user_name = #{userName};
     </select>
 

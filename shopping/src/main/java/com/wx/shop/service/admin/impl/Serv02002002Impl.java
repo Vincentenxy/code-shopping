@@ -2,7 +2,7 @@ package com.wx.shop.service.admin.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wx.shop.entities.pojo.Category;
-import com.wx.shop.mapper.admin.CategoryMapper;
+import com.wx.shop.mapper.CategoryMapper;
 import com.wx.shop.service.admin.Serv02002002;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

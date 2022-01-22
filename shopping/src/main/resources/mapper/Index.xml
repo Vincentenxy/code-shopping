@@ -3,7 +3,7 @@
 <mapper namespace="com.wx.shop.mapper.">
 
     <!--  查询首页图片信息  -->
-    <select id="selectSlideList" resultType="com.wx.shop.entities.pojo.SlideModel">
+    <select id="selectSlideList" resultType="com.wx.shop.entities.pojo.SlideShow">
         select * from slide_show
     </select>
 

@@ -1,5 +1,6 @@
 package com.wx.shop.entities.pojo;
 
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;

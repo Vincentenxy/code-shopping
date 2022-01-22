@@ -1,16 +1,13 @@
 package com.wx.shop.service.comm.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wx.shop.entities.pojo.UserInfoModel;
+import com.wx.shop.entities.pojo.UserInfo;
 import com.wx.shop.exception.entity.BusinessException;
 import com.wx.shop.mapper.UserInfoMapper;
 import com.wx.shop.service.comm.Serv03001002;
-import com.wx.shop.sys.entity.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Random;
 
 /**
  * ProjectName: shopping
@@ -31,23 +28,31 @@ public class Serv03001002Impl implements Serv03001002 {
 
         JSONObject resp = new JSONObject();
 
-        int rows = 0;
         /* 检查用户名是否已经存在 */
         String insertUserName = reqJson.getString("username");
-        UserInfoModel queryUser = userInfoMapper.queryByUserName(reqJson.getString("username"));
+        UserInfo queryUser = userInfoMapper.queryByUserName(reqJson.getString("username"));
         if(queryUser != null && insertUserName.equals(queryUser.getUserName())){
-            resp.put("registFailResult","该用户名已经存在，请重新输入用户名");
+            resp.put("registResult", "0");
+            resp.put("registMsg", "用户名已存在，请重试！");
         } else {
-            UserInfoModel userInfoModel = new UserInfoModel();
+            UserInfo userInfo = new UserInfo();
             //userInfoModel.setUserId(new Random().nextInt(2147483647)); // 随机生成用户id
-            userInfoModel.setUserName(reqJson.getString("username"));
-            userInfoModel.setUserPasswd(reqJson.getString("password"));
-            userInfoModel.setUserPhone(reqJson.getString("userPhone"));
-            userInfoModel.setImgId(reqJson.getString("imgId"));
-            userInfoModel.setFkRoleId(reqJson.getInteger("fkRoleId"));
-            rows = userInfoMapper.insertUserInfo(userInfoModel);
+            userInfo.setUserName(reqJson.getString("username"));
+            userInfo.setUserPasswd(reqJson.getString("password"));
+            userInfo.setUserPhone(reqJson.getString("userPhone"));
+            userInfo.setImgId(reqJson.getString("imgId"));
+            userInfo.setFkRoleId(reqJson.getInteger("fkRoleId"));
+            int rows = userInfoMapper.insertUserInfo(userInfo);
+
+            if(rows > 0){
+                resp.put("registResult", "1");
+                resp.put("registMsg", "恭喜你，注册成功");
+            }else {
+                resp.put("registResult", "0");
+                resp.put("registMsg", "很抱歉，注册失败，请重试！");
+            }
+
         }
-        resp.put("registResult", rows > 0 ? "1" : "0");
 
         return resp;
     }

@@ -1,19 +1,19 @@
 package com.wx.shop.mapper.admin;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wx.shop.entities.pojo.Category;
+import com.wx.shop.entities.pojo.MenuInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
  * ProjectName: shopping
- * CreateTime: 2022/1/22 15:35
+ * CreateTime: 2022/1/10 22:18
  * Author: vincentEnxy
  * Version: 1.0
- * Description: 类别表Mapper
+ * Description: menu_info 数据库表对应的mapper
  */
 @Mapper
 @Repository
-public interface CategoryMapper extends BaseMapper<Category> {
+public interface MenuInfoMapper extends BaseMapper<MenuInfo> {
 
 }

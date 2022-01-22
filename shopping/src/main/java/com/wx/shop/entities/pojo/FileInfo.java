@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Version: 1.0
  * Description: 保存的文件
  */
-public class FileInfoModel implements Serializable {
+public class FileInfo implements Serializable {
 
     private static final long serialVersionUID = 7312117949855179477L;
 
@@ -32,9 +32,9 @@ public class FileInfoModel implements Serializable {
 
     private String spare3; 		// 备用字段3
 
-    public FileInfoModel() { }
+    public FileInfo() { }
 
-    public FileInfoModel(String fileId, String fileUrl, String fileSeq, String fileType, String isMain, String createTime, String spare1, String spare2, String spare3) {
+    public FileInfo(String fileId, String fileUrl, String fileSeq, String fileType, String isMain, String createTime, String spare1, String spare2, String spare3) {
         this.fileId = fileId;
         this.fileUrl = fileUrl;
         this.fileSeq = fileSeq;

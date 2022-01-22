@@ -4,7 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.wx.shop.controller.ControllerInter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * ProjectName: shopping
@@ -16,15 +21,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @Controller
 @ResponseBody
-public class Cont02002001 implements ControllerInter<JSONObject> {
+@CrossOrigin
+@RequestMapping("/api/pri/v1/adm")
+public class Cont02002001 implements ControllerInter<String> {
+
+    @Override
+    public JSONObject befExec(String s) {
+        return null;
+    }
 
     /**
      *
-     * @param jsonObject
+     * @param reqData
      * @return
      */
-    public JSONObject excute(JSONObject jsonObject) {
+    @RequestMapping("/02002001")
+    public JSONObject excute(@RequestBody String reqData) {
 
+        JSONObject reqJson = (JSONObject) JSONObject.parse(reqData);
+        log.info("02002001 reqData = {}", reqData);
+        JSONObject resp = new JSONObject();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        resp.put("ceshi", "测试结果");
+
+        return resp;
+    }
+
+    @Override
+    public JSONObject aftExec(JSONObject retJson) {
         return null;
     }
 }

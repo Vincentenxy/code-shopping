@@ -28,6 +28,11 @@ public class Cont03002003 implements ControllerInter<JSONObject> {
     private Serv03002003 serv03002003;
 
     @Override
+    public JSONObject befExec(JSONObject jsonObject) {
+        return null;
+    }
+
+    @Override
     @RequestMapping(value = "/03002003")
     public JSONObject excute(@RequestBody JSONObject reqJson){
 
@@ -46,6 +51,11 @@ public class Cont03002003 implements ControllerInter<JSONObject> {
         resp.put(Constant.RET_COMM, null);
         resp.put(Constant.RET_BODY, result);
         return resp;
+    }
+
+    @Override
+    public JSONObject aftExec(JSONObject retJson) {
+        return null;
     }
 
 }

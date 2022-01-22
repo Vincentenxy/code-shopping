@@ -1,5 +1,9 @@
 package com.wx.shop.entities.pojo;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
@@ -9,7 +13,10 @@ import java.io.Serializable;
  * Version: 1.0
  * Description: 管理端左侧菜单栏对象实例
  */
-public class MenuInfoModel implements Serializable {
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class MenuInfo implements Serializable {
 
     private static final long serialVersionUID = 19984074456487804L;
 
@@ -18,6 +25,8 @@ public class MenuInfoModel implements Serializable {
     private String menuName;   // 菜单名称
 
     private String menuParent; // 父级菜单id
+
+    private String menuIcon;   // 菜单图标
 
     private String router;     // 菜单对应对应路由
 
@@ -49,6 +58,14 @@ public class MenuInfoModel implements Serializable {
 
     public void setMenuParent(String menuParent) {
         this.menuParent = menuParent;
+    }
+
+    public String getMenuIcon() {
+        return menuIcon;
+    }
+
+    public void setMenuIcon(String menuIcon) {
+        this.menuIcon = menuIcon;
     }
 
     public String getRouter() {
@@ -89,6 +106,7 @@ public class MenuInfoModel implements Serializable {
                 "menuId='" + menuId + '\'' +
                 ", menuName='" + menuName + '\'' +
                 ", menuParent='" + menuParent + '\'' +
+                ", menuIcon='" + menuIcon + '\'' +
                 ", router='" + router + '\'' +
                 ", spare1='" + spare1 + '\'' +
                 ", spare2='" + spare2 + '\'' +

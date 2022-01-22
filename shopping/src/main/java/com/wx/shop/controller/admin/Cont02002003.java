@@ -19,11 +19,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class Cont02002003 implements ControllerInter<JSONObject> {
 
 
+    @Override
+    public JSONObject befExec(JSONObject jsonObject) {
+        return null;
+    }
+
     public JSONObject excute(JSONObject jsonObject) {
         JSONObject resp = new JSONObject();
 
 
         return resp;
+    }
+
+    @Override
+    public JSONObject aftExec(JSONObject retJson) {
+        return null;
     }
 
 

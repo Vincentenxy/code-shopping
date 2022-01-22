@@ -29,6 +29,16 @@ public class Cont03002001 implements ControllerInter<MultipartFile[]>{
     private Serv03002001 serv03002001;
 
     /**
+     * 不需要实现
+     * @param multipartFiles
+     * @return
+     */
+    @Override
+    public JSONObject befExec(MultipartFile[] multipartFiles) {
+        return null;
+    }
+
+    /**
      * 文件上传接口
      * @param files
      * @return
@@ -46,5 +56,15 @@ public class Cont03002001 implements ControllerInter<MultipartFile[]>{
         resp.put(Constant.RET_COMM, null);
         resp.put(Constant.RET_BODY, uploadResult);
         return resp;
+    }
+
+    /**
+     * 不需要实现
+     * @param retJson
+     * @return
+     */
+    @Override
+    public JSONObject aftExec(JSONObject retJson) {
+        return null;
     }
 }

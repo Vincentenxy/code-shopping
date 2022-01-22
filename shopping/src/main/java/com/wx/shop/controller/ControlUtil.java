@@ -19,11 +19,26 @@ public class ControlUtil {
      */
     public static JSONObject packSuccResp(JSONObject respBody){
         JSONObject resp = new JSONObject();
-        resp.put(Constant.RET_CODE, Constant.RET_MSG_SUCC);
+        resp.put(Constant.RET_CODE, Constant.RET_CODE_SUCC);
         resp.put(Constant.RET_MSG, Constant.RET_MSG_SUCC);
         resp.put(Constant.RET_COMM, null);
         resp.put(Constant.RET_BODY, respBody);
         return resp;
     }
+
+    /**
+     * 失败情况下封装数据
+     * @param respBody
+     * @return
+     */
+    public static JSONObject packFailResp(JSONObject respBody){
+        JSONObject resp = new JSONObject();
+        resp.put(Constant.RET_CODE, Constant.RET_CODE_FAIL);
+        resp.put(Constant.RET_MSG, Constant.RET_MSG_FAIL);
+        resp.put(Constant.RET_COMM, null);
+        resp.put(Constant.RET_BODY, respBody);
+        return resp;
+    }
+
 
 }

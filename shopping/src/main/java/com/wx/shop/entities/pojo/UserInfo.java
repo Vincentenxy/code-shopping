@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class UserInfoModel implements Serializable {
+public class UserInfo implements Serializable {
 
     private static final long serialVersionUID=1L;
 

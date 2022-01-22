@@ -1,4 +1,4 @@
-package com.wx.shop.service.index;
+package com.wx.shop.service.wechat.index;
 
 import com.alibaba.fastjson.JSONObject;
 

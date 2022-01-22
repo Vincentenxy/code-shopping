@@ -1,6 +1,6 @@
-package com.wx.shop.mapper;
+package com.wx.shop.mapper.comm;
 
-import com.wx.shop.entities.pojo.FileInfoModel;
+import com.wx.shop.entities.pojo.FileInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public interface CommMapper {
      * 获取文件信息
      * @param fileIndexList
      */
-    public List<FileInfoModel> getFileInfo(List<String> fileIndexList);
+    public List<FileInfo> getFileInfo(List<String> fileIndexList);
 
     /**
      * 获取文件的url
@@ -35,5 +35,5 @@ public interface CommMapper {
      * 插入文件信息
      * @param fileInfoModels
      */
-    public int insertFileInfo(FileInfoModel fileInfoModels);
+    public int insertFileInfo(FileInfo fileInfoModels);
 }

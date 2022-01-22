@@ -2,6 +2,7 @@ package com.wx.shop.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wx.shop.common.Constant;
+import com.wx.shop.common.utils.CheckUtils;
 import com.wx.shop.controller.ControlUtil;
 import com.wx.shop.controller.ControllerInter;
 import com.wx.shop.exception.entity.BusinessException;
@@ -10,6 +11,7 @@ import com.wx.shop.service.admin.Serv02003001;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +28,8 @@ import javax.swing.plaf.basic.BasicButtonUI;
 @Slf4j
 @Controller
 @ResponseBody
-@RequestMapping("/api/pub/v1/adm")
+@CrossOrigin
+@RequestMapping("/api/pri/v1/adm")
 public class Cont02003001 implements ControllerInter<String> {
 
     @Autowired
@@ -52,12 +55,10 @@ public class Cont02003001 implements ControllerInter<String> {
      * @throws BusinessException
      */
     @Override
-    public JSONObject befExec(String s) throws BusinessException {
+    public JSONObject befExec(String s) throws BusinessException{
         JSONObject reqJson = (JSONObject) JSONObject.parse(s);
         JSONObject reqBody = reqJson.getJSONObject("reqBody");
-        if(null == reqBody.getString("userId") || "".equals(reqBody.getString("userId"))){
-            throw new BusinessException(ExecConstant.ERR_CODE_1001, "USER_ID 非空");
-        }
+        CheckUtils.checkParamValidException(reqBody, "username");
         return reqBody;
     }
 
@@ -70,5 +71,6 @@ public class Cont02003001 implements ControllerInter<String> {
     public JSONObject aftExec(JSONObject respJson) {
         log.info("02003001 处理的业务逻辑结果", respJson);
         return ControlUtil.packSuccResp(respJson);
+//        return ControlUtil.packFailResp(respJson);
     }
 }

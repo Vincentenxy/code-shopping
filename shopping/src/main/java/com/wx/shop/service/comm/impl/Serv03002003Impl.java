@@ -1,13 +1,9 @@
 package com.wx.shop.service.comm.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.wx.shop.entities.pojo.FileInfoModel;
-import com.wx.shop.mapper.CommMapper;
-import com.wx.shop.service.comm.Serv03002002;
+import com.wx.shop.mapper.comm.CommMapper;
 import com.wx.shop.service.comm.Serv03002003;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

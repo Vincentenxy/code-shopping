@@ -28,14 +28,19 @@ public class Cont03002002 implements ControllerInter<String> {
     private Serv03002002 serv03002002;
 
     @Override
+    public JSONObject befExec(String s) {
+        return null;
+    }
+
+    @Override
     @RequestMapping(value = "/03002002")
     public JSONObject excute(@RequestBody String req) {
         JSONObject reqJson = (JSONObject) JSONObject.parse(req);
         JSONObject reqData = reqJson.getJSONObject("reqBody"),
                     resp = new JSONObject();
 
-
-        log.info("---->"+reqData);
+        log.info("--req-->"+req);
+        log.info("--reqJson-->"+reqJson);
         /* 数据非空校验 */
         //String checkResult = CheckUtils.checkParamValid(reqData, "fileInfoList"); // 校验文件信息字段是否有
         //log.info("checkReulst==>" + checkResult);
@@ -50,6 +55,11 @@ public class Cont03002002 implements ControllerInter<String> {
         resp.put(Constant.RET_BODY, result);
         return resp;
 
+    }
+
+    @Override
+    public JSONObject aftExec(JSONObject retJson) {
+        return null;
     }
 
 

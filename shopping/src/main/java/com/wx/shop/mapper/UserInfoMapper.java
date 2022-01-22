@@ -1,8 +1,9 @@
 package com.wx.shop.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wx.shop.entities.pojo.UserInfoModel;
+import com.wx.shop.entities.pojo.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * ProjectName: shopping
@@ -12,7 +13,8 @@ import org.apache.ibatis.annotations.Mapper;
  * Description: 用户信息表mapper接口
  */
 @Mapper
-public interface UserInfoMapper extends BaseMapper<UserInfoModel> {
+@Repository
+public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
     /**
      * 查询用户密码
@@ -25,12 +27,12 @@ public interface UserInfoMapper extends BaseMapper<UserInfoModel> {
      * 插入用户信息
      * @return
      */
-    public int insertUserInfo(UserInfoModel userInfoModel);
+    public int insertUserInfo(UserInfo userInfo);
 
     /**
      * 通过用户名查询用户信息
      * @param userName
      * @return
      */
-    public UserInfoModel queryByUserName(String userName);
+    public UserInfo queryByUserName(String userName);
 }

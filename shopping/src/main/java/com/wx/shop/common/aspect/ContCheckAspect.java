@@ -26,7 +26,6 @@ public class ContCheckAspect {
 
     private final String POINT_CUT_LOG = "execution( public * com.wx.shop.controller.*.*.*(..)) && !execution( public * com.wx.shop.controller.noaop.*.*(..))";
 
-
     /* stirng */
     private final String POIINT_CUT_TRAND_DATA = "execution( public * com.wx.shop.controller.*.*.*(String))";
 

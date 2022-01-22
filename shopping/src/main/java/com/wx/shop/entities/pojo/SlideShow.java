@@ -1,5 +1,11 @@
 package com.wx.shop.entities.pojo;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+
 /**
  * ProjectName: shopping
  * CreateTime: 2021/12/19 21:29
@@ -7,7 +13,12 @@ package com.wx.shop.entities.pojo;
  * Version: 1.0
  * Description: 首页轮播图信息model
  */
-public class SlideModel {
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class SlideShow implements Serializable {
+
+    private static final long serialVersionUID = -6181119448684811238L;
 
     private String slideId;     // 轮播图id
 

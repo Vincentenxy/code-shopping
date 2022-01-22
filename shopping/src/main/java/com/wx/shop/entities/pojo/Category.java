@@ -1,31 +1,31 @@
-package com.wx.shop.sys.entity;
+package com.wx.shop.entities.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
- * <p>
- * 微信商城系统-类别信息表
- * </p>
- *
- * @author fanjh
- * @since 2022-01-09
+ * ProjectName: shopping
+ * CreateTime: 2022/1/22 15:49
+ * Author: vincentEnxy
+ * Version: 1.0
+ * Description: 类别信息实体类
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Category implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1904943958768367971L;
 
     /**
      * 类别id
      */
-      @TableId(value = "category_id", type = IdType.AUTO)
+    @TableId(value = "category_id", type = IdType.AUTO)
     private Integer categoryId;
 
     /**

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-01-13 00:21:56
- * @LastEditTime: 2022-01-19 00:55:45
+ * @LastEditTime: 2022-01-23 23:12:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \admin\src\views\user\Register.vue
@@ -29,7 +29,7 @@
     <el-select v-model="registForm.roleId" class="sty_input" placeholder="普通用户">
         <el-option label="店主" value="011"></el-option>
         <el-option label="管理员" value="012"></el-option>
-        <el-option label="普通用户" value="012"></el-option>
+        <el-option label="普通用户" value="013"></el-option>
       </el-select>
     </el-form-item>
   </el-form>
@@ -126,7 +126,6 @@
 
   /* 用户注册页面 */
   function registUser(){
-    console.log("===>用户点击了注册")
     registFormRef.value.validate((valid: boolean)=>{
       if(!valid) return;
       const params = {
@@ -136,9 +135,7 @@
         imgId: registForm.imgId, 
         fkRoleId: registForm.roleId
       }; 
-      console.log("注册请求发送数据", )
       PostRequest('03001002', params, 'pub').then(resp=>{
-        console.log("用户注册返回数据==>" + JSON.stringify(resp)); 
         let respBody = resp.respBody; 
         if(respBody.registResult === "1"){
           ElMessage.success(respBody.registMsg);

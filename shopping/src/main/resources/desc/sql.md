@@ -6,7 +6,7 @@
   ```sql
 
   # show databases;
-  
+
   
   use shop;
   
@@ -82,6 +82,13 @@
   )default charset=utf8 comment '微信商城系统-用户角色表';
   desc role_style;
   drop table role_style;
+  select * from shop.role_style;
+  # 插入数据
+  insert into shop.role_style values
+  ('001', '超级管理员', '超级管理员，拥有最高权限', now(), '', '', ''),
+  ('011', '店主', '店铺店主', now(), '', '', ''),
+  ('012', '客服', '店铺客服', now(), '', '', ''),
+  ('021', '普通客户', '普通购买客户', now(), '', '', '');
   
   # 店铺表
   create table `shop_info` (
@@ -110,13 +117,25 @@
   ) default charset=utf8 comment '微信商城系统-类别信息表';
   desc category;
   drop table category;
+  select * from category;
+  insert into category values
+  
+  ('01000', '手机', '00000', '统一手机大类', '', '', ''),
+  ('02000', '电脑', '00000', '电脑类别', '', '', ''),
+  ('03000', '男装', '00000', '所有男性大类', '', '', ''),
+  ('04000', '女装', '00000', '所有女性服装大类', '', '', ''),
+  ('05000', '美妆', '00000', '化妆品等大类', '', '', ''),
+  ('06000', '房产', '00000', '房子不动产', '', '', ''),
+  ('04001', '女鞋', '04000', '女装下面女鞋', '', '', ''),
+  ('03001', '男鞋', '03000', '男装下面男鞋', '', '', '');
+  
   
   # ------------------------具有外键依赖的表------------------------
   # 用户信息表
   create table user_info (
   `user_id` int(10) auto_increment comment '用户id',
-  `user_name` varchar(30) not null comment '用户名',
-  `user_passwd` varchar(16) not null comment '密码',
+  `user_name` varchar(30)  not null comment '用户名',
+  `user_passwd` varchar(200) not null comment '密码',
   `user_phone`  char(11) not null comment '手机号',
   `create_time` datetime default now() not null comment '注册时间',
   `img_id` varchar(20) comment '用户头像图片编号,图片表外键',
@@ -129,6 +148,14 @@
   ) default charset=utf8 comment '微信商城系统-用户信息表';
   desc user_info;
   drop table user_info;
+  alter table user_info add unique(user_name);
+  alter table user_info modify  `user_passwd` varchar(200);
+  select * from shop.user_info;
+  truncate table user_info;
+  delete from user_info where user_phone = '18638378869';
+  insert into user_info values
+  (110000001, 'cesi', 'asdfasdfasdf', '18638378896', now(), '','12','','','');
+  select user_name from user_info where user_name = 'cesi1';
   
   # 用户收获地址表
   create table `user_address` (
@@ -190,10 +217,21 @@
   ) default charset=utf8 comment '微信商城系统-品牌信息表';
   desc brand_info;
   drop table brand_info;
-  
+  select * from brand_info;
+  insert into brand_info values
+  ('0010001', '阿迪达斯', 'Addias', '阿迪达斯品牌', '03000', '', '', ''),
+  ('0010002', '测试1', 'test1', '测试品牌1', '01000', '', '', ''),
+  ('0010003', '测试2', 'test2', '测试品牌2', '02000', '', '', ''),
+  ('0010004', '测试3', 'test3', '测试品牌3', '03000', '', '', ''),
+  ('0010005', '测试4', 'test4', '测试品牌4', '04000', '', '', ''),
+  ('0010006', '测试5', 'test5', '测试品牌5', '05000', '', '', ''),
+  ('0010007', '测试6', 'test6', '测试品牌6', '06000', '', '', ''),
+  ('0010008', '测试7', 'test7', '测试品牌7', '01000', '', '', ''),
+  ('0010009', '测试8', 'test8', '测试品牌8', '02000', '', '', '');
   # 商品信息表
   create table `goods_info` (
   `goods_id` int(10) auto_increment comment '商品id',
+  `goods_num` varchar(30) not null unique comment '商品唯一编号',
   `goods_name` varchar(100) not null comment '商品名称',
   `goods_lable` varchar(100) not null comment '商品标签',
   `goods_desc` varchar(200) not null comment '商品详情',
@@ -210,37 +248,42 @@
   ) default charset=utf8 comment '微信商城系统-商品信息表';
   desc goods_info;
   drop table goods_info;
+  alter table goods_info add `goods_num` varchar(30) not null unique comment '商品唯一编号';
   
   # 规格信息表
+  drop table if exists `goods_format`;
   create table goods_format (
   `format_id` bigint(20) auto_increment comment '规格id,自增主键',
-  `fk_goods_id` int(10) not null comment '商品id',
+  `fk_goods_num` varchar(30) not null comment '商品唯一编号',
   `format_name` varchar(64) not null comment '规格名称',
-  `format_price`   double(8,2) default 0.00 not null comment '此规格价格',
+  `format_price` double(8,2) default 0.00 not null comment '此规格价格',
   `format_count` int(4) comment '此规格数量',
   `format_status` tinyint(4) default 1 comment '此规格当前状态，0-停用，1-在用',
+  `fk_brand_id` int not null comment '品牌id',
   `create_time` datetime default now() not null comment '此规格创建时间',
   `platform_price`   double(8,2) default 0.00 comment '平台价格',
   `spare1` varchar(10) comment '备用字段',
   `spare2` varchar(50) comment '备用字段',
   `spare3` varchar(100) comment '备用字段',
   primary key (`format_id`),
-  constraint `fk_format_goods` foreign key (`fk_goods_id`) references shop.goods_info(`goods_id`) on update cascade on delete cascade
+  constraint `fk_format_goods` foreign key (`fk_goods_num`) references shop.goods_info(`goods_num`) on update cascade on delete cascade,
+  constraint `fk_format_brand` foreign key (`fk_brand_id`) references shop.brand_info (`brand_id`) on update cascade on delete cascade
   ) default charset=utf8 comment '微信商城系统-商品规格信息表';
   desc goods_format;
   drop table goods_format;
   
   # 图片对应关系表
+  drop table if exists relation_obj_file;
   create table `relation_obj_file` (
   `relation_id` bigint(20) auto_increment comment '商品与图片关系映射关系id',
-  `obj_id` int(10) not null comment '实体信息id',
+  `obj_id` varchar(100) comment '图片所属主体id',
   `fk_file_id` varchar(45) not null comment '文件id,',
   `spare1` varchar(10) comment '备用字段',
   `spare2` varchar(50) comment '备用字段',
   `spare3` varchar(100) comment '备用字段',
   primary key (`relation_id`),
   constraint `fk_relation_file_info` foreign key (fk_file_id) references shop.file_info(file_id) on update cascade on delete cascade
-  ) default charset=utf8 comment '微信商城系统-实体与商品图片视频对应表';
+  ) default charset=utf8 comment '微信商城系统-实体与图片视频对应表';
   desc relation_obj_file;
   drop table relation_obj_file;
   
@@ -333,6 +376,25 @@
   drop table shop.slide_show;
   truncate table  shop.slide_show;
   
+  # 创建评论表
+  drop table if exists `criticism`;
+  create table `criticism` (
+  `criticism_id` int auto_increment comment '评论id',
+  `fk_goods_num` varchar(30) not null comment '商品唯一编号',
+  `fk_user_id` int(10) not null comment '外键，用户id',
+  `content` varchar(600) not null comment '评论内容',
+  `parentId` int comment '父评论id',
+  `date` datetime default now() comment '评论创建时间',
+  `spare1` varchar(10) comment '备用字段',
+  `spare2` varchar(50) comment '备用字段',
+  `spare3` varchar(100) comment '备用字段',
+  primary key (`criticism_id`),
+  constraint `fk_criticism_goods` foreign key (`fk_goods_num`) references shop.goods_info(`goods_num`) on update cascade on delete cascade,
+  constraint `fk_criticism_user` foreign key (`fk_user_id`) references shop.user_info(`user_id`) on update cascade on delete cascade
+  ) default charset=utf8 comment '微信商城系统-商品评论表';
+  desc criticism;
+  
+  
   #测试
   CREATE TABLE `new_mobile` (
   `id` int(11) NOT NULL auto_increment,
@@ -392,6 +454,5 @@
   select * from file_info;
   select * from menu_info;
   drop table menu_info;
-
 
   ```

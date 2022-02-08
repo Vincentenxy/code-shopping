@@ -16,7 +16,8 @@ spring:
     multipart:
       max-file-size: 300MB # 单个文件大小
       max-request-size: 600MB # 连续上传文件大小
-
+  profiles:
+    active: dev
 
 
 #mybatis:

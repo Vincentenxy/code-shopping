@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-01-01 19:52:56
- * @LastEditTime: 2022-01-08 15:58:11
+ * @LastEditTime: 2022-02-08 23:12:29
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \test-vue\src\utils\reqdata\index.ts
@@ -14,7 +14,7 @@ import http from "./reqeusttool"
  */
 enum ReqConstans {
   BASE_URL_PRI = "/api/pri/v1/adm/",
-  BASE_URL_LOGIN = "/api/pub/v1/comm/"
+  BASE_URL_COMM = "/api/pub/v1/comm/",
 }
 
 export const GetRequest = (reqUrl: string) => {
@@ -42,9 +42,27 @@ export const PostRequest = (reqCode: string, reqData: any, ...reqParams: string[
   }
 
   return http.request({
-    url: (reqParams && reqParams[0] && reqParams[0] === 'pub' ? ReqConstans.BASE_URL_LOGIN : ReqConstans.BASE_URL_PRI) + reqCode,
+    url: (reqParams && reqParams[0] && reqParams[0] === 'pub' ? ReqConstans.BASE_URL_COMM : ReqConstans.BASE_URL_PRI) + reqCode,
     method: "POST",
     data: reqStr
   });
 
 };
+
+/**
+ * 文件上传接口
+ * @param reqCode 请求码
+ * @param reqData 请求数据
+ */
+export const UploadFile = (reqCode: string, reqData: any) => {
+
+  http.getInsideConfig().headers = {
+    "Content-Type": "multipart/form-data"
+  };
+
+  return http.request({
+    url: ReqConstans.BASE_URL_COMM + reqCode,
+    method: "POST",
+    data: reqData.fileData
+  });
+}
